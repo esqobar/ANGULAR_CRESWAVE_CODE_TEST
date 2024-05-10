@@ -1,0 +1,46 @@
+<div class="flex justify-center items-center mt-4">
+  <mat-card class="w-full max-w-lg p-4">
+    <mat-card-title class="text-xl text-center">Edit Task</mat-card-title>
+    <div class="flex justify-between items-center mb-2">
+      <button mat-icon-button class="font-bold" (click)="onGoBack()">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+    </div>
+    <form #taskForm="ngForm" (ngSubmit)="onSubmit(taskForm)">
+      <div class="mb-4">
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>Title</mat-label>
+          <input matInput name="title" [(ngModel)]="task.title" required maxlength="50" minlength="3"/>
+          <mat-error *ngIf="taskForm.controls['title']?.invalid && taskForm.controls['title']?.touched">
+            Title is required and should be between 3 and 50 characters.
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="mb-4">
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>Description</mat-label>
+          <textarea matInput name="description" [(ngModel)]="task.description" required maxlength="200" minlength="10" ></textarea>
+          <mat-error *ngIf="taskForm.controls['description']?.invalid && taskForm.controls['description']?.touched">
+            Title is required and should be between 10 and 200 characters.
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="mb-4">
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>Status</mat-label>
+          <mat-select name="status" [(ngModel)]="task.status" >
+            <mat-option value="incomplete">Incomplete</mat-option>
+            <mat-option value="complete">Complete</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="flex justify-between mt-4">
+        <button mat-button
+                class="bg-green-500 hover:bg-green-600"
+                type="submit"
+                [disabled]="taskForm.invalid"
+        >Update Task</button>
+      </div>
+    </form>
+  </mat-card>
+</div>
